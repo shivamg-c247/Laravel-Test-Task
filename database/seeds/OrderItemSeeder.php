@@ -2,16 +2,16 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Orders;
+use App\OrderItems;
 
-class OrdersSeeder extends Seeder{
+class OrderItemSeeder extends Seeder{
     /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run(){
-		Orders::truncate();
-        factory(Orders::class, 400)->create();
+    	OrderItems::truncate();
+        factory(OrderItems::class, 200)->create();
     }
 }

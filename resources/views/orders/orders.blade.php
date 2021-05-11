@@ -6,30 +6,32 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <div class="container">
-           <h2>List of all Customers</h2>
-        <table class="table table-bordered" id="productsData">
+    <div class="container custom-cont">
+        <h2 class="text-center">List of Orders</h2>
+        <table class="table table-bordered" id="ordersData">
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Invoice Number</th>
                     <th>Name</th>
-                    <th>Price</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
         </table>
     </div>
     <script>
         $(document).ready( function () {
-            $('#productsData').DataTable({
+            $('#ordersData').DataTable({
                 processing: true,
                 serverSide: true,
                 $ajax: "{{ url('productslist') }}",
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'invoice_number', name: 'invoice_number' },
-                    { data: 'total_amount', name: 'total_amount' },
+                    { data: 'name', name: 'name' },
                     { data: 'status', name: 'status' },
+                    { data: 'action', name: 'action' },
                 ]
             });
         });

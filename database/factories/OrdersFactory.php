@@ -9,7 +9,8 @@ use Illuminate\Support\Str;
 $factory->define(Orders::class, function (Faker $faker) {
     return [
     	'invoice_number' => Str::random(10),
-		'total_amount' => rand(100, 1000),
-		'status' => 'new',
+		'customer_id' => rand(1, 200),
+		'product_id' => rand(1, 100),
+		'status' => rand(1, 2),
     ];
 });

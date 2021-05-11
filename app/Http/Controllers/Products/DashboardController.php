@@ -21,8 +21,17 @@ class DashboardController extends Controller{
 	public function productsList(Request $request){
 		if ($request->ajax()) {
 			$data = Products::latest()->get();
+			foreach ($data as $key => $value) {
+				$status = $value->in_stock;
+				if($status == 1){
+					$data[$key]['status'] = 'In Stock';
+				}else{
+					$data[$key]['status'] = 'Out of Stock';
+				}
+			}
 			return datatables::of($data)->make(true);
-        }
+		}
 		return view('products.products');
 	}
+
 }

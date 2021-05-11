@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
 use Auth;
 
 class UserMiddleware{
@@ -14,7 +13,6 @@ class UserMiddleware{
      * @param  \Closure  $next
      * @return mixed
      */
-    
     public function handle($request, Closure $next){
         if(auth::check() && Auth::user()->role_id == 2){
             return $next($request);

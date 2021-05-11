@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Orders extends Model{
+class OrderItems extends Model{
 	protected $fillable = [
-		'invoice_number', 'customer_id', 'product_id', 'status',
+		'order_id', 'product_id', 'quantity',
 	];
 }

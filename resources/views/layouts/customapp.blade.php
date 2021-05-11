@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -41,16 +42,28 @@
 
                             @if(Auth::check() && Auth::user()->role_id == 2)
                             <li class="nav-item">
-                                <a href="{{ url('user/dashboard') }}">Customers</a>
+                                <a class="btn" href="{{ url('user/dashboard') }}">Customers</a>
                             </li>
                             @endif
 
                             @if(Auth::check() && Auth::user()->role_id == 3)
                             <li class="nav-item">
-                                <a href="{{ url('products/dashboard') }}">Products</a>
+                                <a class="btn" href="{{ url('products/dashboard') }}">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('orders/dashboard') }}">Orders</a>
+                                <a class="btn" href="{{ url('orders/dashboard') }}">Orders</a>
+                            </li>
+                            @endif
+
+                            @if(Auth::check() && Auth::user()->role_id == 1)
+                            <li class="nav-item">
+                                <a class="btn" href="{{ url('admin/dashboard') }}">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" href="{{ url('admin/dashboard') }}">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" href="{{ url('admin/dashboard') }}">Orders</a>
                             </li>
                             @endif
 

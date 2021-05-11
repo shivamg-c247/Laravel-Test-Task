@@ -16,45 +16,47 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', function () {
-    // return view('welcome');
+    return view('welcome');
     // return view('auth.login');
-    return redirect()->guest('login');
+    // return redirect()->guest('login');
+});
+
+/* === Default === */
+Route::group(['middleware'=>['auth']], function () {
+	Route::get('/', 'HomeController@index')->name('home');
+	Route::get('/home', 'HomeController@index')->name('home');
 });
 
 
-// Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/', 'HomeController@index')->name('home');
+/* === Admin Routing === */
+Route::group(['middleware'=>['admin']], function () {
 
+	Route::get('admin/dashboard', 'User\DashboardController@index')->name('dashboard');
+	Route::get('admin/dashboard', 'User\DashboardController@customersList')->name('customerslist');
 
-// Route::group(['as'=>'admin.','prefix' => 'admin','namespace'=>'Admin','middleware'=>['auth','admin']], function () {
-Route::group(['middleware'=>['auth','admin']], function () {
-		Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+	Route::get('admin/dashboard', 'Products\DashboardController@index')->name('products');
+	Route::get('admin/dashboard', 'Products\DashboardController@productsList')->name('productslist');
 
-		Route::get('admin/dashboard', 'User\DashboardController@index')->name('dashboard');
-		Route::get('admin/dashboard', 'User\DashboardController@customersList')->name('customerslist');
-
-		// Route::get('/', 'HomeController@index')->name('home');
-		Route::get('admin/dashboard', 'Products\DashboardController@index')->name('products');
-		Route::get('admin/dashboard', 'Products\DashboardController@productsList')->name('productslist');
-
-		Route::get('admin/dashboard', 'Orders\DashboardController@index')->name('orders');
-		Route::get('admin/dashboard', 'Orders\DashboardController@ordersList')->name('orderslist');
+	Route::get('admin/dashboard', 'Orders\DashboardController@index')->name('orders');
+	Route::get('admin/dashboard', 'Orders\DashboardController@ordersList')->name('orderslist');
+	Route::get('admin/dashboard/show/{id}', 'Orders\DashboardController@show')->name('show');
 });
 
 
-// Route::group(['as'=>'user.','prefix' => 'user','namespace'=>'User','middleware'=>['auth','user']], function () {
-Route::group(['middleware'=>['auth','user']], function () {
-		Route::get('/', 'HomeController@index')->name('home');
-		Route::get('user/dashboard', 'User\DashboardController@index')->name('dashboard');
-		Route::get('user/dashboard', 'User\DashboardController@customersList')->name('customerslist');
+/* === Customer/User Routing === */
+Route::group(['as'=>'user.','prefix' => 'user','namespace'=>'User','middleware'=>['user']], function () {
+	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+	Route::get('dashboard', 'DashboardController@customersList')->name('customerslist');
 });
 
 
-Route::group(['middleware'=>['auth','manager']], function () {
-		Route::get('/', 'HomeController@index')->name('home');
-		Route::get('products/dashboard', 'Products\DashboardController@index')->name('products');
-		Route::get('products/dashboard', 'Products\DashboardController@productsList')->name('productslist');
+/* === Manager Routing === */
+Route::group(['middleware'=>['manager']], function () {
+	
+	Route::get('products/dashboard', 'Products\DashboardController@index')->name('products');
+	Route::get('products/dashboard', 'Products\DashboardController@productsList')->name('productslist');
 
-		Route::get('orders/dashboard', 'Orders\DashboardController@index')->name('orders');
-		Route::get('orders/dashboard', 'Orders\DashboardController@ordersList')->name('orderslist');
+	Route::get('orders/dashboard', 'Orders\DashboardController@index')->name('orders');
+	Route::get('orders/dashboard', 'Orders\DashboardController@ordersList')->name('orderslist');
+	Route::get('orders/dashboard/show/{id}', 'Orders\DashboardController@show')->name('show');
 });

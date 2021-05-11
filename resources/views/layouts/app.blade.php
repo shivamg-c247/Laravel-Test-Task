@@ -50,18 +50,30 @@
                             @endif
                         @else
                             
-                            @if((Auth::check() && Auth::user()->role_id == 2) || (Auth::check() && Auth::user()->role_id == 1))
+                            @if(Auth::check() && Auth::user()->role_id == 2)
                             <li class="nav-item">
-                                <a href="{{ url('user/dashboard') }}">Customers</a>
+                                <a class="btn" href="{{ url('user/dashboard') }}">Customers</a>
                             </li>
                             @endif
 
-                            @if((Auth::check() && Auth::user()->role_id == 3) || (Auth::check() && Auth::user()->role_id == 1))
+                            @if(Auth::check() && Auth::user()->role_id == 3)
                             <li class="nav-item">
-                                <a href="{{ url('products/dashboard') }}">Products</a>
+                                <a class="btn" href="{{ url('products/dashboard') }}">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('orders/dashboard') }}">Orders</a>
+                                <a class="btn" href="{{ url('orders/dashboard') }}">Orders</a>
+                            </li>
+                            @endif
+
+                            @if(Auth::check() && Auth::user()->role_id == 1)
+                            <li class="nav-item">
+                                <a class="btn" href="{{ url('admin/dashboard') }}">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" href="{{ url('products/dashboard') }}">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn" href="{{ url('admin/dashboard') }}">Orders</a>
                             </li>
                             @endif
 

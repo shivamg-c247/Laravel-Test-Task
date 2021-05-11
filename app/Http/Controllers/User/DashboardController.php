@@ -23,6 +23,14 @@ class DashboardController extends Controller{
 		// return datatables::of($data)->make(true);
 		if ($request->ajax()) {
 			$data = Customers::latest()->get();
+
+            foreach ($data as $key => $val) {
+                $created_data = $val->created_at;
+                $splitTimeStamp = explode(" ",$created_data);
+                $date = date("m-d-Y", strtotime($splitTimeStamp[0]));
+                $data[$key]['dateUk'] = $date;
+            }
+
 			return datatables::of($data)->make(true);
 			
             // $data = Customers::latest()->get();
