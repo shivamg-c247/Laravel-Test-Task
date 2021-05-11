@@ -57,10 +57,10 @@
 
                             @if(Auth::check() && Auth::user()->role_id == 1)
                             <li class="nav-item">
-                                <a class="btn" href="{{ url('admin/dashboard') }}">Customers</a>
+                                <a class="btn" href="{{ url('admin/dashboard/user') }}">Customers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn" href="{{ url('admin/dashboard') }}">Products</a>
+                                <a class="btn" href="{{ url('admin/dashboard/products') }}">Products</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn" href="{{ url('admin/dashboard') }}">Orders</a>

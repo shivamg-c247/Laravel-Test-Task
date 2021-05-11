@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome');
-    // return view('auth.login');
-    // return redirect()->guest('login');
+	return view('welcome');
 });
 
 /* === Default === */
@@ -31,11 +29,11 @@ Route::group(['middleware'=>['auth']], function () {
 /* === Admin Routing === */
 Route::group(['middleware'=>['admin']], function () {
 
-	Route::get('admin/dashboard', 'User\DashboardController@index')->name('dashboard');
-	Route::get('admin/dashboard', 'User\DashboardController@customersList')->name('customerslist');
+	Route::get('admin/dashboard/user', 'User\DashboardController@index')->name('dashboard');
+	Route::get('admin/dashboard/user', 'User\DashboardController@customersList')->name('customerslist');
 
-	Route::get('admin/dashboard', 'Products\DashboardController@index')->name('products');
-	Route::get('admin/dashboard', 'Products\DashboardController@productsList')->name('productslist');
+	Route::get('admin/dashboard/products', 'Products\DashboardController@index')->name('products');
+	Route::get('admin/dashboard/products', 'Products\DashboardController@productsList')->name('productslist');
 
 	Route::get('admin/dashboard', 'Orders\DashboardController@index')->name('orders');
 	Route::get('admin/dashboard', 'Orders\DashboardController@ordersList')->name('orderslist');

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Orders;
 use DataTables;
 use DB;
+use Auth;
 
 class DashboardController extends Controller{
 	 /**
@@ -35,9 +36,16 @@ class DashboardController extends Controller{
 					$data[$key]->status = 'Processed';
 				}
 			}
-			return datatables::of($data)
+
+			if(Auth::check() && Auth::user()->role_id == 1){
+				return datatables::of($data)
+				->addColumn('action', function ($user) { return '<a href="/admin/dashboard/show/'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye"></i> Show</a>';})
+				->make(true);
+			}else{
+				return datatables::of($data)
 				->addColumn('action', function ($user) { return '<a href="/orders/dashboard/show/'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-eye"></i> Show</a>';})
 				->make(true);
+			}
         }
 		return view('orders.orders');
 	}
