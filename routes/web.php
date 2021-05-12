@@ -53,6 +53,7 @@ Route::group(['middleware'=>['manager']], function () {
 	
 	Route::get('products/dashboard', 'Products\DashboardController@index')->name('products');
 	Route::get('products/dashboard', 'Products\DashboardController@productsList')->name('productslist');
+	Route::get('products/dashboard/status', 'Products\DashboardController@productsListStatus');
 
 	Route::get('orders/dashboard', 'Orders\DashboardController@index')->name('orders');
 	Route::get('orders/dashboard', 'Orders\DashboardController@ordersList')->name('orderslist');

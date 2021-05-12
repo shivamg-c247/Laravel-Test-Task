@@ -34,4 +34,23 @@ class DashboardController extends Controller{
 		return view('products.products');
 	}
 
+	public function productsListStatus(Request $request){
+		$mode = $request->input('mode');
+		if($mode == 'true'){
+			$mode = 1;
+		}elseif($mode == 'false'){
+			$mode = 2;
+		}
+		$data = Products::where('in_stock', $mode)->latest()->get();
+		foreach ($data as $key => $value) {
+			$status = $value->in_stock;
+			if($status == 1){
+				$data[$key]['status'] = 'In Stock';
+			}else{
+				$data[$key]['status'] = 'Out of Stock';
+			}
+		}
+		return datatables::of($data)->make(true);
+	}
+
 }
